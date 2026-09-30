@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Filme</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-4">
+
+	<h1>Filme</h1>
+
+	<form th:object="${filme}" th:action="@{/save}" method="post">
+
+		<input type="hidden" th:field="*{id}">
+
+		<div class="mb-3">
+			<label class="form-label">Título</label>
+			<input type="text" class="form-control" th:field="*{titulo}">
+			<div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}">Erro</div>
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Diretor</label>
+			<input type="text" class="form-control" th:field="*{diretor}">
+			<div class="text-danger" th:if="${#fields.hasErrors('diretor')}" th:errors="*{diretor}">Erro</div>
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Data de lançamento</label>
+			<input type="date" class="form-control" th:field="*{lancamento}">
+			<div class="text-danger" th:if="${#fields.hasErrors('lancamento')}" th:errors="*{lancamento}">Erro</div>
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Gênero</label>
+			<select class="form-select" th:field="*{genero}">
+				<option value="">Selecione</option>
+				<option th:each="g : ${generos}" th:value="${g.id}" th:text="${g.description}">Drama</option>
+			</select>
+			<div class="text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}">Erro</div>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Salvar</button>
+		<a class="btn btn-secondary" th:href="@{/}">Cancelar</a>
+	</form>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Catálogo de Filmes</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-4">
+
+	<h1>Catálogo de Filmes</h1>
+	<a class="btn btn-primary mb-3" th:href="@{/add}">Novo filme</a>
+
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>Título</th>
+			<th>Diretor</th>
+			<th>Lançamento</th>
+			<th>Gênero</th>
+			<th>Ações</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="filme : ${filmes}">
+			<td th:text="${filme.titulo}">Título</td>
+			<td th:text="${filme.diretor}">Diretor</td>
+			<td th:text="${filme.lancamento}">2026-01-01</td>
+			<td th:text="${filme.genero.description}">Drama</td>
+			<td>
+				<a class="btn btn-sm btn-warning" th:href="@{/edit/{id}(id=${filme.id})}">Editar</a>
+				<form th:action="@{/delete/{id}(id=${filme.id})}" method="post" class="d-inline">
+					<button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+				</form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
